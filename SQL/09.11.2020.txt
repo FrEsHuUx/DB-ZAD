@@ -1,0 +1,3 @@
+create table postac (id_postaci int auto_increment primary key, nazwa varchar(40), rodzaj enum('wiking','mysql> create table postac (id_postaci int auto_increment primaj enum('wiking','ptak','kobieta'), data_ur date, wiek int unsigned);
+
+

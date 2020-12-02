@@ -1,0 +1,65 @@
+INSERT INTO postac(id_postaci, nazwa, rodzaj, data_ur, wiek) VALUES(default, 'Drozd', 'ptak', '1999.02.13', '666');
+
+
+INSERT INTO postac(id_postaci, nazwa, rodzaj, data_ur, wiek) VALUES(default, 'Teściowa', 'kobieta', '899.09.11', '997');
+ UPDATE postac SET wiek=88 WHERE nazwa='Teciowa'
+
+
+create table walizka (id_walizki int auto_increment primary key, pojemnosc int unsigned, kolor enum('rozowy','czerwony','teczowy','zloty'), id_wlasciciela int, foreign key (id_wlasciciela) references postac(id_postaci) ON DELETE CASCADE ON UPDATE CASCADE);
+
+ALTER TABLE walizka ALTER kolor SET DEFAULT 'rozowy';
+
+
+INSERT INTO walizka VALUES(default, '23', 'czerwony', '1');
+INSERT INTO walizka VALUES(default, '112', 'teczowy', '3');
+
+
+CREATE TABLE izba (adres_budynku varchar(50), nazwa_izby varchar(50),metraz int unsigned, wlasciciel int,primary key (adres_budynku, nazwa_izby), foreign key (wlasciciel) references postac(id_postaci) on delete set null);
+
+ALTER TABLE izba ADD COLUMN kolor enum('rozowy','czerwony','teczowy','zloty','czarny','zielony','pomaranczowy') AFTER metraz;
+
+ALTER TABLE izba ALTER kolor SET DEFAULT 'czarny';
+
+INSERT INTO izba VALUES('IMBA','IZBA BJORNA', 55, default, 1);
+
+
+CREATE TABLE przetwory (id_przetowru int auto_increment primary key, rok_produkcji INT(4), id_wykonawcy int, zawartosc varchar(50), dodatek varchar(50), id_konsumenta int, foreign key(id_wykonawcy) references postac(id_postaci));
+
+ALTER TABLE przetwory ALTER rok_produkcji SET DEFAULT '1654';
+
+ALTER TABLE przetwory ALTER dodatek SET DEFAULT 'papryczka chilli';
+
+ALTER TABLE przetwory ADD FOREIGN KEY (id_konsumenta) REFERENCES postac(id_postaci);
+
+INSERT INTO przetwory VALUES (default, default, 1, 'bigos', default, 3);
+
+INSERT INTO postac VALUES(default, 'Maks', 'wiking', 321-03-03, 997);
+INSERT INTO postac VALUES(default, 'Marcelek', 'wiking', '1992-02-11', 112);
+INSERT INTO postac VALUES(default, 'Witek Senior', 'wiking', '1410-09-22', 1410);
+INSERT INTO postac VALUES(default, 'Young Krystyn', 'wiking', '2020-11-01', 1);
+INSERT INTO postac VALUES(default, 'Lil Eldoka', 'wiking', '1997-12-12', 21);
+
+CREATE TABLE statek (nazwa_statku varchar(50) primary key, rodzaj_statku enum('sneki','skeid','drakan','kuter','tratwa'), data_wodowania DATE, max_ladownosc int unsigned);
+INSERT INTO statek VALUES('Ferrari', 'tratwa', '1923-02-02', 998);
+INSERT INTO statek VALUES('LADA', 'kuter', '1500-11-11', 1);
+
+ALTER TABLE postac ADD COLUMN funkcja varchar(50);
+
+UPDATE postac SET funkcja='kapitan' WHERE id_postaci=1;
+
+ALTER TABLE postac ADD COLUMN statek varchar(50);
+ALTER TABLE postac ADD FOREIGN KEY (statek) REFERENCES statek(nazwa_statku);
+
+UPDATE postac SET statek='Ferrari' WHERE id_postaci=1;
+UPDATE postac SET statek='LADA' WHERE id_postaci=2;
+UPDATE postac SET statek='Ferrari' WHERE id_postaci=4;
+UPDATE postac SET statek='Ferrari' WHERE id_postaci=5;
+UPDATE postac SET statek='Ferrari' WHERE id_postaci=6;
+UPDATE postac SET statek='Ferrari' WHERE id_postaci=7;
+UPDATE postac SET statek='Ferrari' WHERE id_postaci=8;
+
+
+DELETE FROM izba WHERE nazwa_izby = 'spizarnia';
+DROP TABLE izba;
+
+

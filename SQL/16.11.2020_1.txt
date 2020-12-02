@@ -1,0 +1,35 @@
+1.
+A)
+select * from postac where rodzaj='wiking' and nazwa!='Bjorn' order by wiek;
+
+DELETE FROM postac WHERE id_postaci=5;
+DELETE FROM postac WHERE id_postaci=4;
+
+
+
+B)
+ALTER TABLE walizka DROP FOREIGN KEY walizka_ibfk_1;
+ALTER TABLE przetwory DROP FOREIGN KEY przetwory_ibfk_1;
+ALTER TABLE przetwory DROP FOREIGN KEY przetwory_ibfk_2;
+
+ALTER TABLE postac modify id_postaci int;
+ALTER TABLE postac DROP id_postaci;
+
+2.
+A)
+ ALTER TABLE postac ADD pesel varchar(11);
+ UPDATE postac SET pesel='72345362031'+wiek;
+alter table postac add primary key(pesel);
+B)
+SHOW CREATE TABLE postac;
+alter table postac modify rodzaj enum('wiking','ptak','kobieta','syrena');
+C)
+INSERT INTO postac VALUES ('Gertruda Nieszczera','syrena','1996-04-10','37',DEFAULT,DEFAULT,'29364583911');
+
+3.
+A)
+SELECT nazwa FROM postac WHERE nazwa LIKE '%a%';
+B)
+UPDATE statek SET max_ladownosc=max_ladownosc*0.7 WHERE data_wodowania >= '1901-01-01' AND data_wodowania <'2001-01-01';
+
+ 
